@@ -24,7 +24,7 @@
   with_items: ["accesslogs", "tasklogs"]
 
 - name: make-config | Properties file should be deployed
-  notiry: Restart digdag
+  notify: Restart digdag
   template:
     src:   "opt/digdag/server.properties.j2"
     dest:  "/opt/digdag/server.properties"
@@ -33,7 +33,7 @@
     mode:  "0644"
 
 - name: make-config | Secret access policy file should be deployed
-  notiry: Restart digdag
+  notify: Restart digdag
   template:
     src:   "opt/digdag/secret-access-policy.yml.j2"
     dest:  "/opt/digdag/secret-access-policy.yml"

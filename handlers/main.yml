@@ -7,7 +7,7 @@
 #          |___/             |___/                                                                 
 # handlers file for ar-digdag-src
 - name: Restart digdag
-  servie:
+  service:
     name:  "digdag"
     state: "restarted"
 
