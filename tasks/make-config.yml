@@ -35,8 +35,8 @@
 - name: make-config | Secret access policy file should be deployed
   notify: Restart digdag
   template:
-    src:   "opt/digdag/secret-access-policy.yml.j2"
-    dest:  "/opt/digdag/secret-access-policy.yml"
+    src:   "opt/digdag/secret-access-policy.yaml.j2"
+    dest:  "/opt/digdag/secret-access-policy.yaml"
     owner: "{{ digdag.user.username }}"
     group: "{{ digdag.user.group }}"
     mode:  "0644"

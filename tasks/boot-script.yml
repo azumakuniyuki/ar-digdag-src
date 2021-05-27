@@ -8,6 +8,7 @@
 # boot-script
 - block:
     - name: boot-script | RedHat | /usr/lib/systemd/system/digdag.service should be deployed
+      notify: Restart digdag
       register: deploy_digdag_service_unit
       template:
         src:   "usr/lib/systemd/system/digdag.service.j2"
@@ -28,7 +29,7 @@
         enabled: "yes"
 
     - name: boot-script | digdag.service should be started
-      when: digdag.staretd == true
+      when: digdag.started == true
       systemd:
         name:  "digdag"
         state: "started"

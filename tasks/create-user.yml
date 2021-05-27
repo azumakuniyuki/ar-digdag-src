@@ -23,9 +23,17 @@
     home:       "{{ digdag.user.home }}"
     state:      "present"
 
-- name: create-user | dovecot should be included in virtmail group
+- name: create-user | digdag should be included in other groups
   user:
     name:   "digdag"
     groups: "{{ digdag.user.groups.0 }}"
     state:  "present"
+
+- name: create-user | SSH public keys should be registered
+  when: digdag.user.key
+  authorized_key:
+    user:  "{{ digdag.user.username }}"
+    state: "present"
+    key:   "{{ digdag.user.key }}"
+    validate_certs: true
 

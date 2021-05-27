@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 - block:
     - name: install-pkg | Amazon | Java 11 Repository should be enabled
-      when: digdag.java == 11
+      when: digdag.java == "11"
       shell: >
         amazon-linux-extras list
         |  grep java-openjdk11
@@ -19,7 +19,7 @@
   when: ansible_distribution == "Amazon"
 
 - name: install-pkg | Amazon | Java 11 should be installed
-  when: digdag.java == 11
+  when: digdag.java == "11"
   yum:
     name:  "java-11-openjdk"
     state: "present"
