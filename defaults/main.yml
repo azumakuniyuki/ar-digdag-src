@@ -9,6 +9,7 @@
 digdag:
   started: true
   enabled: true
+  options: "--memory"
   java: "11"
   dest: "/usr/local/sbin"
   conf:
