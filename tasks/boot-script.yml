@@ -1,0 +1,36 @@
+---
+#      _ _           _                                   ___            _        
+#   __| (_) __ _  __| | __ _  __ _       ___ _ __ ___   / / |_ __ _ ___| | _____ 
+#  / _` | |/ _` |/ _` |/ _` |/ _` |_____/ __| '__/ __| / /| __/ _` / __| |/ / __|
+# | (_| | | (_| | (_| | (_| | (_| |_____\__ \ | | (__ / / | || (_| \__ \   <\__ \
+#  \__,_|_|\__, |\__,_|\__,_|\__, |     |___/_|  \___/_/   \__\__,_|___/_|\_\___/
+#          |___/             |___/                                               
+# boot-script
+- block:
+    - name: boot-script | RedHat | /usr/lib/systemd/system/digdag.service should be deployed
+      register: deploy_digdag_service_unit
+      template:
+        src:   "usr/lib/systemd/system/digdag.service.j2"
+        dest:  "/usr/lib/systemd/system/digdag.service"
+        mode:  "0644"
+        owner: "root"
+        group: "root"
+
+    - name: boot-script | digdag.service should be reloaded
+      when: deploy_digdag_service_unit.changed
+      systemd:
+        daemon_reload: "yes"
+
+    - name: boot-script | digdag.service should be enabled
+      when: digdag.enabled == true
+      systemd:
+        name:    "digdag"
+        enabled: "yes"
+
+    - name: boot-script | digdag.service should be started
+      when: digdag.staretd == true
+      systemd:
+        name:  "digdag"
+        state: "started"
+  when: ansible_os_family == "RedHat"
+

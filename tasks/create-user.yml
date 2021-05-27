@@ -1,0 +1,31 @@
+---
+#      _ _           _                                   ___            _        
+#   __| (_) __ _  __| | __ _  __ _       ___ _ __ ___   / / |_ __ _ ___| | _____ 
+#  / _` | |/ _` |/ _` |/ _` |/ _` |_____/ __| '__/ __| / /| __/ _` / __| |/ / __|
+# | (_| | | (_| | (_| | (_| | (_| |_____\__ \ | | (__ / / | || (_| \__ \   <\__ \
+#  \__,_|_|\__, |\__,_|\__,_|\__, |     |___/_|  \___/_/   \__\__,_|___/_|\_\___/
+#          |___/             |___/                                               
+# create-user
+- name: create-user | Group for digdag should be created
+  group:
+    name:  "{{ digdag.user.group }}"
+    gid:   "{{ digdag.user.gid }}"
+    state: "present"
+
+- name: create-user | User for digdag should be created
+  user:
+    createhome: "yes"
+    password:   "{{ digdag.user.password }}"
+    name:       "{{ digdag.user.username }}"
+    uid:        "{{ digdag.user.uid }}"
+    group:      "{{ digdag.user.group }}"
+    shell:      "{{ digdag.user.shell }}"
+    home:       "{{ digdag.user.home }}"
+    state:      "present"
+
+- name: create-user | dovecot should be included in virtmail group
+  user:
+    name:   "digdag"
+    groups: "{{ digdag.user.groups.0 }}"
+    state:  "present"
+

@@ -1,0 +1,99 @@
+#      _ _           _                __                               _   _           
+#   __| (_) __ _  __| | __ _  __ _   / / __  _ __ ___  _ __   ___ _ __| |_(_) ___  ___ 
+#  / _` | |/ _` |/ _` |/ _` |/ _` | / / '_ \| '__/ _ \| '_ \ / _ \ '__| __| |/ _ \/ __|
+# | (_| | | (_| | (_| | (_| | (_| |/ /| |_) | | | (_) | |_) |  __/ |  | |_| |  __/\__ \
+#  \__,_|_|\__, |\__,_|\__,_|\__, /_/ | .__/|_|  \___/| .__/ \___|_|   \__|_|\___||___/
+#          |___/             |___/    |_|             |_|                              
+# 
+# https://docs.digdag.io/command_reference.html
+# -------------------------------------------------------------------------------------------------
+server.bind = {{ digdag.conf.http.webui.bind }}
+server.port = {{ digdag.conf.http.webui.port }}
+server.admin.bind = {{ digdag.conf.http.admin.bind }}
+server.admin.port = {{ digdag.conf.http.admin.port }}
+
+server.access-log.path = {{ digdag.conf.logs }}/accesslogs
+server.access-log.pattern = json
+#digdag.secret-access-policy-file = secret-access-policy.yaml
+#digdag.secret-encryption-key = (base64 encoded 128-bit AES encryption key)
+
+# -------------------------------------------------------------------------------------------------
+# server.http.*
+#server.http.io-threads = 2
+#server.http.worker-threads = 16
+#server.http.no-request-timeout = 60
+#server.http.request-parse-timeout = 30
+#server.http.io-idle-timeout = 300
+#server.http.enable-http2 = false
+#server.http.headers.KEY = 
+
+#server.jmx.port =
+#server.authenticator.type = 
+
+# -------------------------------------------------------------------------------------------------
+# database.*
+#database.type = postgresql
+#database.user = digdag
+#database.password = password-string
+#database.host = 127.0.0.1
+#database.port = 5432
+#database.database = digdag
+#database.loginTimeout = 30
+#database.socketTimeout = 1800
+#database.ssl = false
+#database.connectionTimeout = 30
+#database.idleTimeout = 600
+#database.validationTimeout = 5
+#database.maximumPoolSize = 64
+#database.minimumPoolSize = 64
+#database.leakDetectionThreshold = 0
+#database.migrate = true
+
+# -------------------------------------------------------------------------------------------------
+# archive.*
+#archive.type = db
+
+#archive.s3.endpoint = s3.amazonaws.com
+#archive.s3.bucket =
+#archive.s3.path =
+#archive.s3.credentials.access-key-id =
+#archive.s3.credentials.secret-access-key =
+#archive.s3.path-style-access = false
+
+#archive.gcs.bucket =
+#archive.gcs.credentials.json.content =
+
+# -------------------------------------------------------------------------------------------------
+# log-server.*
+#log-server.type = null
+#log-server.s3.endpoint = s3.amazonaws.com
+#log-server.s3.bucket =
+#log-server.s3.path =
+#log-server.s3.direct_download = false
+#log-server.s3.credentials.access-key-id =
+#log-server.s3.credentials.secret-access-key =
+#log-server.s3.path-style-access = false
+#log-server.gcs.bucket = 
+#log-server.local.path digdag.log
+#log-server.local.split_size = 0
+
+# -------------------------------------------------------------------------------------------------
+# executor.*
+#executor.task_ttl = 1d
+#executor.task_max_run = 1000
+#executor.attempt_ttl = 7d
+#executor.attempt_max_run = 100
+#executor.enqueue_random_fetch = false
+#executor.enqueue_fetch_size = 100
+
+# -------------------------------------------------------------------------------------------------
+# api.*
+#api.max_attempts_page_size =
+#api.max_sessions_page_size =
+#api.max_archive_total_size_limit =
+
+# -------------------------------------------------------------------------------------------------
+# eval.*
+#eval.js-engine-type = graal
+#eval.extended-syntax = true
+

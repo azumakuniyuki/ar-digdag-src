@@ -1,0 +1,43 @@
+---
+#      _ _           _                                   ___            _        
+#   __| (_) __ _  __| | __ _  __ _       ___ _ __ ___   / / |_ __ _ ___| | _____ 
+#  / _` | |/ _` |/ _` |/ _` |/ _` |_____/ __| '__/ __| / /| __/ _` / __| |/ / __|
+# | (_| | | (_| | (_| | (_| | (_| |_____\__ \ | | (__ / / | || (_| \__ \   <\__ \
+#  \__,_|_|\__, |\__,_|\__,_|\__, |     |___/_|  \___/_/   \__\__,_|___/_|\_\___/
+#          |___/             |___/                                               
+# make-config
+- name: make-config | Log directory for digdag should be created
+  file:
+    path:  "{{ digdag.conf.logs }}"
+    owner: "{{ digdag.user.username }}"
+    group: "{{ digdag.user.group }}"
+    mode:  "0755"
+    state: "directory"
+
+- name: make-config | Detailed log directory for digdag should be created
+  file:
+    path:  "{{ digdag.conf.logs }}/{{ item }}"
+    owner: "{{ digdag.user.username }}"
+    group: "{{ digdag.user.group }}"
+    mode:  "0755"
+    state: "directory"
+  with_items: ["accesslogs", "tasklogs"]
+
+- name: make-config | Properties file should be deployed
+  notiry: Restart digdag
+  template:
+    src:   "opt/digdag/server.properties.j2"
+    dest:  "/opt/digdag/server.properties"
+    owner: "{{ digdag.user.username }}"
+    group: "{{ digdag.user.group }}"
+    mode:  "0644"
+
+- name: make-config | Secret access policy file should be deployed
+  notiry: Restart digdag
+  template:
+    src:   "opt/digdag/secret-access-policy.yml.j2"
+    dest:  "/opt/digdag/secret-access-policy.yml"
+    owner: "{{ digdag.user.username }}"
+    group: "{{ digdag.user.group }}"
+    mode:  "0644"
+

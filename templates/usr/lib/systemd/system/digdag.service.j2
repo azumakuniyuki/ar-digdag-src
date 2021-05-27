@@ -1,0 +1,18 @@
+[Unit]
+Description=digdag
+
+[Service]
+Type=simple
+User={{ digdag.user.username }}
+Group={{ digdag.user.group }}
+WorkingDirectory={{ digdag.user.home }}
+PIDFile=/run/digdag.pid
+Restart=always
+RestartSec=5
+KillMode=process
+TimeoutStartSec=30s
+ExecStart=/bin/sh -c "{{ digdag.dest }}/digdag server --config {{ digdag.user.home }}/server.properties --max-task-threads 2--log {{ digdag.conf.logs }}/serverlogs/digdag-server.log --task-log {{ digdag.conf.logs }}/tasklogs --access-log {{ digdag.conf.logs }}/accesslogs --bind {{ digdag.conf.bind }}"
+
+[Install]
+WantedBy=multi-user.target
+

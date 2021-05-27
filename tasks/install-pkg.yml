@@ -1,0 +1,26 @@
+---
+#      _ _           _                                   ___            _        
+#   __| (_) __ _  __| | __ _  __ _       ___ _ __ ___   / / |_ __ _ ___| | _____ 
+#  / _` | |/ _` |/ _` |/ _` |/ _` |_____/ __| '__/ __| / /| __/ _` / __| |/ / __|
+# | (_| | | (_| | (_| | (_| | (_| |_____\__ \ | | (__ / / | || (_| \__ \   <\__ \
+#  \__,_|_|\__, |\__,_|\__,_|\__, |     |___/_|  \___/_/   \__\__,_|___/_|\_\___/
+#          |___/             |___/                                               
+# install-pkg
+# -----------------------------------------------------------------------------
+- block:
+    - name: install-pkg | Amazon | Java 11 Repository should be enabled
+      when: digdag.java == 11
+      shell: >
+        amazon-linux-extras list
+        |  grep java-openjdk11
+        |  grep enabled
+        || amazon-linux-extras enable java-openjdk11
+      changed_when: false
+  when: ansible_distribution == "Amazon"
+
+  - name: install-pkg | Amazon | Java 11 should be installed
+    when: digdag.java == 11
+    yum:
+      name:  "java-11-openjdk"
+      state: "present"
+
